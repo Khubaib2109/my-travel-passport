@@ -132,6 +132,43 @@
       font-size: 0.75rem;
       color: #6b7280;
     }
+    /* ---- ADD THIS AT THE VERY END OF THE <style> BLOCK ---- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 1rem;
+  }
+
+  .layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #map {
+    width: 100%;
+    height: 60vh;
+  }
+
+  button {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .trip-entry {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+/* ---- END OF MOBILE CSS ---- */
   </style>
 </head>
 
