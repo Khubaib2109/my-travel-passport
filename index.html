@@ -132,22 +132,29 @@
       font-size: 0.75rem;
       color: #6b7280;
     }
-   /* ---- ADD THIS AT THE VERY END OF THE <style> BLOCK ---- */
+/* ---- MOBILE LAYOUT OVERRIDES (phones & small tablets) ---- */
 @media (max-width: 900px) {
+  /* Stack sidebar and map vertically */
   .layout {
     flex-direction: column;
-    height: auto;
+    height: 100vh;           /* give the column a fixed height */
+    width: 100%;
   }
 
+  /* Sidebar should be full-width and scrollable if tall */
   .left-panel {
     width: 100%;
+    max-height: 45vh;        /* top half-ish of the screen */
+    overflow-y: auto;
     border-right: none;
     border-bottom: 1px solid #ddd;
   }
 
+  /* Map sits underneath, full-width, with real height */
   #map {
+    flex: 0 0 55vh;          /* stop flex:1; take ~55% of screen height */
     width: 100%;
-    height: 60vh;
+    height: 55vh;
   }
 }
 
