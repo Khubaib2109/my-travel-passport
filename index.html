@@ -311,33 +311,27 @@
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(96px, 1fr));
-      gap: 9px;
+      grid-template-columns: repeat(5, minmax(76px, 1fr));
+      gap: 7px;
     }
 
     .stat {
-      min-height: 68px;
-      padding: 10px;
-      border-radius: 18px;
+      min-height: 52px;
+      padding: 8px 10px;
+      border-radius: 15px;
       background: var(--surface-strong);
       border: 1px solid var(--line);
       overflow: visible;
       position: relative;
-      cursor: help;
+      cursor: default;
     }
 
-    .stat::after {
-      content: "";
-      position: absolute;
-      inset: auto -25px -35px auto;
-      width: 85px;
-      height: 85px;
-      border-radius: 999px;
-      background: rgba(37, 99, 235, 0.09);
-    }
+    .stat::after { display: none; }
+
+    .stat.has-tooltip { cursor: help; }
 
     .stat-value {
-      font-size: 1.25rem;
+      font-size: 1.05rem;
       font-weight: 950;
       letter-spacing: -0.04em;
       position: relative;
@@ -345,9 +339,9 @@
     }
 
     .stat-label {
-      margin-top: 3px;
+      margin-top: 2px;
       color: var(--muted);
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 750;
       position: relative;
       z-index: 1;
@@ -356,7 +350,7 @@
     .stat-tooltip {
       position: absolute;
       left: 50%;
-      top: calc(100% + 10px);
+      top: calc(100% + 8px);
       transform: translateX(-50%) translateY(-4px);
       width: min(340px, 80vw);
       max-height: 320px;
@@ -375,8 +369,8 @@
       transition: opacity 0.16s ease, transform 0.16s ease;
     }
 
-    .stat:hover .stat-tooltip,
-    .stat:focus-within .stat-tooltip {
+    .stat.has-tooltip:hover .stat-tooltip,
+    .stat.has-tooltip:focus-within .stat-tooltip {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
@@ -418,9 +412,21 @@
 
     .filters {
       display: grid;
-      grid-template-columns: 1fr 0.78fr 0.78fr 0.9fr;
+      grid-template-columns: 1fr 0.78fr 0.78fr;
       gap: 8px;
     }
+
+    .trips-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(150px, 210px);
+      gap: 10px;
+      align-items: end;
+      margin: 0 0 10px;
+    }
+
+    .trips-toolbar .actions { margin: 0; }
+
+    .trip-sort label { margin-bottom: 5px; }
 
     .filters-panel {
       position: sticky;
@@ -585,48 +591,77 @@
 
     .map-stats-card {
       pointer-events: auto;
-      background: rgba(15, 23, 42, 0.76);
+      background: rgba(15, 23, 42, 0.72);
       color: #e5e7eb;
+      padding: 10px;
     }
 
     .map-stats-card .stat {
-      background: rgba(255,255,255,0.10);
-      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
     }
 
     .map-stats-card .stat-label,
     .map-stats-card .small {
-      color: rgba(226,232,240,0.78);
+      color: rgba(226,232,240,0.76);
     }
 
     .dashboard-head {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(220px, 360px);
-      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) minmax(190px, 300px);
+      gap: 10px;
       align-items: end;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .dashboard-head h2 {
       color: #fff;
-      font-size: 0.94rem;
+      font-size: 0.86rem;
+      letter-spacing: -0.01em;
     }
 
     .dashboard-actions {
       pointer-events: auto;
-      min-width: 190px;
+      min-width: 170px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      background: rgba(15, 23, 42, 0.76);
+      gap: 7px;
+      background: rgba(15, 23, 42, 0.72);
+      padding: 10px;
     }
 
     .dashboard-actions .btn,
     .dashboard-actions .btn-secondary {
       width: 100%;
-      padding: 9px 11px;
-      font-size: 0.78rem;
+      padding: 8px 10px;
+      font-size: 0.76rem;
       box-shadow: none;
+    }
+
+    .options-menu {
+      position: relative;
+      pointer-events: auto;
+    }
+
+    .options-popover {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 7px);
+      min-width: 175px;
+      display: none;
+      flex-direction: column;
+      gap: 7px;
+      padding: 9px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.35);
+      z-index: 25;
+    }
+
+    .options-menu:hover .options-popover,
+    .options-menu:focus-within .options-popover {
+      display: flex;
     }
 
     .topbar {
@@ -903,6 +938,24 @@
       font-weight: 900;
     }
 
+
+    .overview-body {
+      display: grid;
+      gap: 11px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .overview-body strong { color: var(--ink); }
+
+    .overview-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .overview-list li { margin: 5px 0; }
+
     @media (max-width: 1120px) {
       .app-shell {
         grid-template-columns: 1fr;
@@ -939,7 +992,7 @@
         max-width: 100%;
       }
 
-      .form-grid, .filters, .stats-grid, .dashboard-head, .map-dashboard {
+      .form-grid, .filters, .stats-grid, .dashboard-head, .map-dashboard, .trips-toolbar {
         grid-template-columns: 1fr;
       }
 
@@ -1046,15 +1099,6 @@
               <label for="date-to-filter">To date</label>
               <input type="date" id="date-to-filter" />
             </div>
-            <div class="field">
-              <label for="sort-filter">Sort</label>
-              <select id="sort-filter">
-                <option value="date-asc">Oldest first</option>
-                <option value="date-desc">Newest first</option>
-                <option value="distance-desc">Longest first</option>
-                <option value="distance-asc">Shortest first</option>
-              </select>
-            </div>
           </div>
           <div class="mode-chips" id="mode-chips"></div>
         </section>
@@ -1064,9 +1108,20 @@
             <h2>Your trips</h2>
             <span class="small"><span id="visible-count">0</span> visible</span>
           </div>
-          <div class="actions" style="margin:0 0 10px;">
-            <button class="btn btn-secondary" type="button" id="play-visible-btn">▶ Play all trips</button>
-            <button class="btn btn-secondary" type="button" id="focus-all-btn">◎ Focus all</button>
+          <div class="trips-toolbar">
+            <div class="actions">
+              <button class="btn btn-secondary" type="button" id="play-visible-btn">▶ Play all trips</button>
+              <button class="btn btn-secondary" type="button" id="focus-all-btn">◎ Focus all</button>
+            </div>
+            <div class="field trip-sort">
+              <label for="sort-filter">Sort trips</label>
+              <select id="sort-filter">
+                <option value="date-asc">Oldest first</option>
+                <option value="date-desc">Newest first</option>
+                <option value="distance-desc">Longest first</option>
+                <option value="distance-asc">Shortest first</option>
+              </select>
+            </div>
           </div>
           <div class="trip-list" id="trip-list"></div>
         </section>
@@ -1082,7 +1137,7 @@
           <div class="dashboard-head">
             <div>
               <h2>Trip stats</h2>
-              <div class="small">Hover over a stat to see the calculation behind it.</div>
+              <div class="small">Compact totals. Hover Countries or Distance for details.</div>
             </div>
             <div>
               <div class="home-row" style="margin-bottom:6px;">
@@ -1093,29 +1148,26 @@
             </div>
           </div>
           <div class="stats-grid map-stats-grid">
-            <div class="stat" id="stat-card-trips" tabindex="0"><div class="stat-value" id="stat-trips">0</div><div class="stat-label">Segments</div><div class="stat-tooltip" id="tooltip-trips"></div></div>
-            <div class="stat" id="stat-card-countries" tabindex="0"><div class="stat-value" id="stat-countries">0</div><div class="stat-label">Countries</div><div class="stat-tooltip" id="tooltip-countries"></div></div>
-            <div class="stat" id="stat-card-distance" tabindex="0"><div class="stat-value" id="stat-distance">0 km</div><div class="stat-label">Distance</div><div class="stat-tooltip" id="tooltip-distance"></div></div>
-            <div class="stat" id="stat-card-places" tabindex="0"><div class="stat-value" id="stat-places">0</div><div class="stat-label">Places</div><div class="stat-tooltip" id="tooltip-places"></div></div>
-            <div class="stat" id="stat-card-flights" tabindex="0"><div class="stat-value" id="stat-flights">0</div><div class="stat-label">Flights</div><div class="stat-tooltip" id="tooltip-flights"></div></div>
+            <div class="stat" id="stat-card-trips"><div class="stat-value" id="stat-trips">0</div><div class="stat-label">Segments</div></div>
+            <div class="stat has-tooltip" id="stat-card-countries" tabindex="0"><div class="stat-value" id="stat-countries">0</div><div class="stat-label">Countries</div><div class="stat-tooltip" id="tooltip-countries"></div></div>
+            <div class="stat has-tooltip" id="stat-card-distance" tabindex="0"><div class="stat-value" id="stat-distance">0 km</div><div class="stat-label">Distance</div><div class="stat-tooltip" id="tooltip-distance"></div></div>
+            <div class="stat" id="stat-card-places"><div class="stat-value" id="stat-places">0</div><div class="stat-label">Places</div></div>
+            <div class="stat" id="stat-card-flights"><div class="stat-value" id="stat-flights">0</div><div class="stat-label">Flights</div></div>
           </div>
         </div>
         <div class="floating-card dashboard-actions">
           <button class="btn" type="button" id="data-tools-btn">⬆ Import / export</button>
+          <button class="btn btn-secondary" type="button" id="overview-btn">ℹ Overview</button>
+          <div class="options-menu">
+            <button class="btn btn-secondary" type="button" id="options-btn">⚙ Options</button>
+            <div class="options-popover" aria-label="Globe options">
+              <button class="btn btn-secondary" type="button" id="theme-btn">🌙 Dark mode</button>
+              <button class="btn btn-secondary" type="button" id="rotate-btn">⏸ Rotate</button>
+              <button class="btn btn-secondary" type="button" id="globe-style-btn">🌐 Night globe</button>
+            </div>
+          </div>
           <button class="btn btn-secondary" type="button" id="play-visible-btn-top">▶ Play visible</button>
           <button class="btn btn-secondary" type="button" id="focus-all-btn-top">◎ Focus all</button>
-        </div>
-      </div>
-
-      <div class="topbar">
-        <div class="floating-card map-help">
-          <strong>Drag to rotate · scroll to zoom</strong>
-          Click a route card to focus it. Press play to watch your trips in chronological order. Free to use, but route/geocoding accuracy is not guaranteed.
-        </div>
-        <div class="floating-card globe-controls">
-          <button class="btn btn-secondary" type="button" id="theme-btn">🌙 Dark</button>
-          <button class="btn btn-secondary" type="button" id="rotate-btn">⏸ Rotate</button>
-          <button class="btn btn-secondary" type="button" id="globe-style-btn">🌐 Night globe</button>
           <button class="btn btn-secondary" type="button" id="stop-btn">■ Stop</button>
         </div>
       </div>
@@ -1222,6 +1274,28 @@
         <button class="btn btn-secondary" type="button" id="restore-json-btn">Restore from backup</button>
       </div>
       <p class="small" style="margin:10px 0 0;">Use CSV for spreadsheets. Use JSON backup to preserve all coordinates and settings.</p>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="overview-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h2>Overview</h2>
+          <div class="small">How to use your Travel Passport globe.</div>
+        </div>
+        <button class="modal-close" type="button" id="overview-close-btn">×</button>
+      </div>
+      <div class="overview-body">
+        <p><strong>What this is:</strong> a free-to-use personal travel visualiser. It stores your trips in this browser using localStorage. Route distances and locations are estimated, so accuracy is not guaranteed.</p>
+        <ul class="overview-list">
+          <li><strong>Add a trip</strong> manually, or use <strong>Import / export</strong> to paste rows from Excel or upload CSV/XLSX files.</li>
+          <li><strong>Filter</strong> by search, date range and travel mode. Sorting now lives in <strong>Your trips</strong>.</li>
+          <li><strong>Play visible</strong> animates the currently visible trips in chronological order, including same-day movements by import order.</li>
+          <li><strong>Options</strong> lets you switch dark mode, globe style and auto-rotation without taking up space on the map.</li>
+          <li><strong>Countries</strong> and <strong>Distance</strong> stats have hover details; the other stats stay clean and compact.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -1840,19 +1914,14 @@
       document.getElementById("home-trip-count").textContent = countHomeJourneys(trips, homeLabel);
 
       const sortedCountries = Array.from(countries).sort((a, b) => a.localeCompare(b));
-      const sortedPlaces = Array.from(places).sort((a, b) => a.localeCompare(b));
-      const filteredChrono = filtered.slice().sort(sortByTripDate);
       const longestRoutes = filtered.slice().sort((a, b) => b.distance - a.distance).slice(0, 8);
       const distanceByMode = Object.entries(modeCounts)
         .filter(([, count]) => count)
         .map(([mode]) => ({ mode, km: filtered.filter(t => t.mode === mode).reduce((sum, t) => sum + t.distance, 0) }))
         .sort((a, b) => b.km - a.km);
 
-      setStatTooltip("tooltip-trips", `<strong>Segments shown</strong>${filtered.length} route segment${filtered.length === 1 ? "" : "s"} currently match the search, date range and mode filters.${filteredChrono.length ? `<table><tr><th>First</th><td>${escapeHtml(filteredChrono[0].date || "No date")}</td></tr><tr><th>Last</th><td>${escapeHtml(filteredChrono[filteredChrono.length - 1].date || "No date")}</td></tr></table>` : ""}`);
       setStatTooltip("tooltip-countries", `<strong>Countries visited</strong><div>${sortedCountries.length ? escapeHtml(sortedCountries.join(", ")) : "No countries found yet."}</div>`);
       setStatTooltip("tooltip-distance", `<strong>Distance calculation</strong>Total of visible route distances: ${formatDistance(dist)}.${distanceByMode.length ? `<table><tr><th>Mode</th><th>Distance</th></tr>${distanceByMode.map(row => `<tr><td>${getModeIcon(row.mode)} ${escapeHtml((modeMeta[row.mode] || modeMeta.other).label)}</td><td>${formatDistance(row.km)}</td></tr>`).join("")}</table>` : ""}${longestRoutes.length ? `<table><tr><th>Longest visible routes</th><th>km</th></tr>${longestRoutes.map(t => `<tr><td>${escapeHtml(shortPlace(t.fromLabel))} → ${escapeHtml(shortPlace(t.toLabel))}</td><td>${formatDistance(t.distance)}</td></tr>`).join("")}</table>` : ""}`);
-      setStatTooltip("tooltip-places", `<strong>Unique places</strong><div>${sortedPlaces.length ? escapeHtml(sortedPlaces.slice(0, 40).join(", ")) + (sortedPlaces.length > 40 ? `, +${sortedPlaces.length - 40} more` : "") : "No places added yet."}</div>`);
-      setStatTooltip("tooltip-flights", `<strong>Flights shown</strong>${modeCounts.flight || 0} visible flight segment${modeCounts.flight === 1 ? "" : "s"}.${filtered.filter(t => t.mode === "flight").length ? `<table><tr><th>Route</th><th>Date</th></tr>${filtered.filter(t => t.mode === "flight").slice().sort(sortByTripDate).slice(0, 10).map(t => `<tr><td>${escapeHtml(shortPlace(t.fromLabel))} → ${escapeHtml(shortPlace(t.toLabel))}</td><td>${escapeHtml(t.date || "")}</td></tr>`).join("")}</table>` : ""}`);
     }
 
     function setStatTooltip(id, html) {
@@ -2473,6 +2542,16 @@
       if (e.target.id === "data-modal") document.getElementById("data-modal").classList.remove("show");
     });
 
+    document.getElementById("overview-btn").onclick = () => {
+      document.getElementById("overview-modal").classList.add("show");
+    };
+    document.getElementById("overview-close-btn").onclick = () => {
+      document.getElementById("overview-modal").classList.remove("show");
+    };
+    document.getElementById("overview-modal").addEventListener("click", e => {
+      if (e.target.id === "overview-modal") document.getElementById("overview-modal").classList.remove("show");
+    });
+
     document.getElementById("swap-btn").onclick = () => {
       const from = document.getElementById("from-place");
       const to = document.getElementById("to-place");
@@ -2681,7 +2760,7 @@
     --------------------------------------------------------- */
     function applySavedTheme() {
       document.body.dataset.theme = settings.dark ? "dark" : "light";
-      document.getElementById("theme-btn").textContent = settings.dark ? "☀️ Light" : "🌙 Dark";
+      document.getElementById("theme-btn").textContent = settings.dark ? "☀️ Light mode" : "🌙 Dark mode";
       document.getElementById("rotate-btn").textContent = settings.autoRotate ? "⏸ Rotate" : "▶ Rotate";
       if (globe) globe.backgroundColor("rgba(0,0,0,0)");
     }
