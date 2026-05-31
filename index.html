@@ -126,7 +126,7 @@
       padding: 26px 22px 24px;
       position: relative;
       overflow: hidden;
-      min-height: 195px;
+      min-height: 245px;
     }
 
     .brand-card::after {
@@ -214,11 +214,6 @@
       justify-content: space-between;
       gap: 8px;
       margin-bottom: 10px;
-      position: sticky;
-      top: -2px;
-      z-index: 6;
-      padding: 8px 0;
-      background: linear-gradient(to bottom, var(--surface-strong), var(--surface-strong));
     }
 
     h2 {
@@ -516,10 +511,9 @@
       left: 16px;
       right: 16px;
       top: 16px;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: start;
-      gap: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
       z-index: 5;
       pointer-events: none;
     }
@@ -547,112 +541,6 @@
       margin-bottom: 3px;
       font-size: 0.86rem;
     }
-
-
-    .arrival-banner {
-      pointer-events: none;
-      align-self: start;
-      justify-self: center;
-      min-width: min(460px, 50vw);
-      max-width: min(540px, 58vw);
-      text-align: center;
-      opacity: 0;
-      transform: translateY(-8px);
-      transition: opacity 0.18s ease, transform 0.18s ease;
-    }
-
-    .arrival-banner.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .arrival-banner-title {
-      font-size: clamp(1.15rem, 0.95rem + 0.8vw, 1.7rem);
-      font-weight: 950;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
-    }
-
-    .arrival-banner-subtitle {
-      margin-top: 4px;
-      color: rgba(226, 232, 240, 0.84);
-      font-size: 0.84rem;
-      line-height: 1.25;
-    }
-
-    .arrival-banner-subtitle {
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.92);
-      font-size: 0.92rem;
-    }
-
-    .arrival-banner-route {
-      margin-top: 6px;
-      color: rgba(226, 232, 240, 0.78);
-      font-size: 0.78rem;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
-    }
-
-    .help-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 110;
-      display: none;
-      place-items: center;
-      padding: 18px;
-      background: rgba(2, 6, 23, 0.54);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .help-overlay.show { display: grid; }
-
-    .help-sheet {
-      width: min(720px, 100%);
-      background: var(--surface-strong);
-      color: var(--ink);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-
-    .help-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-      margin: 16px 0 18px;
-    }
-
-    .help-tip {
-      border: 1px solid var(--line);
-      background: var(--surface);
-      border-radius: 18px;
-      padding: 14px;
-    }
-
-    .help-tip strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 0.95rem;
-    }
-
-    
-
-    .sidebar-panel-hidden { display: none !important; }
-    .map-stats { display:flex; align-items:stretch; gap:10px; flex-wrap:wrap; justify-self:center; width:min(760px, 100%); pointer-events:auto; }
-    .stat-pill { min-width:92px; padding:10px 12px; border-radius:18px; border:1px solid rgba(255,255,255,0.14); background:rgba(15,23,42,0.62); color:#fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
-    .stat-pill .k { font-size:0.76rem; color:rgba(226,232,240,0.72); line-height:1.1; margin-bottom:4px; }
-    .stat-pill .v { font-size:1.1rem; font-weight:900; line-height:1.1; letter-spacing:-0.03em; }
-    .stat-pill.has-hover { cursor:help; }
-    .map-tools-btn { align-self:center; white-space:nowrap; }
-    .data-modal textarea { width:100%; min-height:180px; resize:vertical; margin-top:10px; }
-    .data-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; }
-    .topbar { grid-template-columns:auto minmax(280px,1fr) minmax(330px,auto) auto; }
-    .arrival-banner { min-width:min(360px,38vw); max-width:min(430px,42vw); }
 
     .globe-controls {
       display: flex;
@@ -792,7 +680,6 @@
       border: none;
       box-shadow: none;
       transform: translate(-50%, -50%);
-      transform-origin: center center;
       pointer-events: none;
       text-shadow: 0 3px 10px rgba(0,0,0,0.75);
       filter: drop-shadow(0 2px 5px rgba(0,0,0,0.45));
@@ -936,21 +823,10 @@
         left: 10px;
         right: 10px;
         top: 10px;
-        grid-template-columns: 1fr;
+        display: grid;
       }
 
       .map-help { display: none; }
-
-      .arrival-banner {
-        order: -1;
-        min-width: 0;
-        max-width: 100%;
-      }
-
-      
-
-      .data-grid { grid-template-columns: 1fr; }
-      .map-stats { justify-self: stretch; }
 
       .bottom-tray {
         left: 10px;
@@ -1021,7 +897,7 @@
         </form>
       </section>
 
-      <section class="panel sidebar-panel-hidden" id="bulk-import-panel">
+      <section class="panel">
         <div class="section-title">
           <h2>Bulk import</h2>
           <span class="small">Paste Excel or upload CSV/XLSX</span>
@@ -1041,7 +917,7 @@
         <div class="small import-status" id="import-status">No spreadsheet loaded yet.</div>
       </section>
 
-      <section class="panel sidebar-panel-hidden" id="sidebar-stats-panel">
+      <section class="panel">
         <div class="section-title">
           <h2>Stats</h2>
           <span class="small">Visible filters + all-time countries</span>
@@ -1073,12 +949,8 @@
               <input id="search-filter" placeholder="city, country, airline..." />
             </div>
             <div class="field">
-              <label for="date-from-filter">From date</label>
-              <input id="date-from-filter" type="date" />
-            </div>
-            <div class="field">
-              <label for="date-to-filter">To date</label>
-              <input id="date-to-filter" type="date" />
+              <label for="year-filter">Year</label>
+              <select id="year-filter"><option value="">All years</option></select>
             </div>
             <div class="field">
               <label for="sort-filter">Sort</label>
@@ -1105,7 +977,7 @@
           <div class="trip-list" id="trip-list"></div>
         </section>
 
-        <section class="panel sidebar-panel-hidden" id="export-panel" style="margin-top:14px;">
+        <section class="panel" id="export-panel" style="margin-top:14px;">
           <div class="section-title">
             <h2>Export / backup</h2>
             <span class="small">CSV + JSON</span>
@@ -1128,21 +1000,7 @@
           <strong>Drag to rotate · scroll to zoom</strong>
           Click a route card to focus it. Press play to watch the plane move through your trips in chronological order.
         </div>
-        <div class="floating-card arrival-banner" id="arrival-banner" aria-live="polite">
-          <div class="arrival-banner-title" id="arrival-banner-title"></div>
-          <div class="arrival-banner-subtitle" id="arrival-banner-subtitle"></div>
-          <div class="arrival-banner-route" id="arrival-banner-route"></div>
-        </div>
-        <div class="floating-card map-stats" id="map-stats">
-          <div class="stat-pill has-hover" id="map-stat-segments"><div class="k">Segments</div><div class="v" id="map-stat-trips">0</div></div>
-          <div class="stat-pill has-hover" id="map-stat-countries-wrap"><div class="k">Countries</div><div class="v" id="map-stat-countries">0</div></div>
-          <div class="stat-pill has-hover" id="map-stat-distance-wrap"><div class="k">Distance</div><div class="v" id="map-stat-distance">0 km</div></div>
-          <div class="stat-pill has-hover" id="map-stat-places-wrap"><div class="k">Places</div><div class="v" id="map-stat-places">0</div></div>
-          <div class="stat-pill has-hover" id="map-stat-flights-wrap"><div class="k">Flights</div><div class="v" id="map-stat-flights">0</div></div>
-          <button class="btn btn-secondary map-tools-btn" type="button" id="data-tools-btn">⬆⬇ Data tools</button>
-        </div>
         <div class="floating-card globe-controls">
-          <button class="btn btn-secondary" type="button" id="help-btn">❔ Help</button>
           <button class="btn btn-secondary" type="button" id="theme-btn">🌙 Dark</button>
           <button class="btn btn-secondary" type="button" id="rotate-btn">⏸ Rotate</button>
           <button class="btn btn-secondary" type="button" id="globe-style-btn">🌐 Night globe</button>
@@ -1214,53 +1072,6 @@
     </div>
   </div>
 
-  <div class="help-overlay" id="help-overlay">
-    <div class="help-sheet">
-      <div class="section-title" style="margin-bottom: 6px;">
-        <h2 style="font-size:1.4rem;">Welcome to My Travel Passport</h2>
-        <span class="small">Quick guide</span>
-      </div>
-      <p class="small" style="font-size:0.92rem; line-height:1.5;">This globe shows your travel history. Add trips manually or paste/import a spreadsheet, then use the globe and the trip list to explore routes and play them back in chronological order. It is free to use, but location accuracy and geocoding are not guaranteed.</p>
-      <div class="help-grid">
-        <div class="help-tip"><strong>Rotate and zoom</strong><span class="small">Drag the globe to rotate it and use your mouse wheel or trackpad to zoom in and out.</span></div>
-        <div class="help-tip"><strong>Add or import trips</strong><span class="small">Use “Add a trip” for one route, or “Bulk import” to paste an Excel table or upload CSV/XLSX.</span></div>
-        <div class="help-tip"><strong>Focus a route</strong><span class="small">Click any trip card to centre that route on the globe and inspect the path more closely.</span></div>
-        <div class="help-tip"><strong>Play your timeline</strong><span class="small">Use “Play timeline” to animate your routes in date order. Adjust playback speed at the bottom right.</span></div>
-      </div>
-      <div class="help-actions">
-        <button class="btn btn-secondary" type="button" id="help-later-btn">Close</button>
-        <button class="btn" type="button" id="help-start-btn">Got it</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="help-overlay" id="data-overlay">
-    <div class="help-sheet data-modal">
-      <div class="section-title" style="margin-bottom: 6px;">
-        <h2 style="font-size:1.25rem;">Data tools</h2>
-        <span class="small">Import, export, and backup</span>
-      </div>
-      <p class="small" style="font-size:0.92rem; line-height:1.5;">Paste a spreadsheet table below or upload a CSV/XLSX file. You can also export your current trips or download/restore a JSON backup.</p>
-      <textarea id="modal-bulk-paste" placeholder="date	from	to	mode	company
-2025-06-14	Sydney	Osaka	flight	Qantas
-2025-06-18	Osaka	Tokyo	train	Shinkansen"></textarea>
-      <div class="data-grid">
-        <div class="actions">
-          <button class="btn" type="button" id="modal-import-paste-btn">＋ Import pasted rows</button>
-          <button class="btn btn-secondary" type="button" id="modal-upload-sheet-btn">⬆ Upload spreadsheet</button>
-          <button class="chip" type="button" id="modal-sample-import-btn">Insert sample</button>
-        </div>
-        <div class="actions">
-          <button class="btn btn-secondary" type="button" id="modal-export-btn">Export CSV</button>
-          <button class="btn btn-secondary" type="button" id="modal-backup-json-btn">Download backup JSON</button>
-          <button class="btn btn-secondary" type="button" id="modal-restore-json-btn">Restore from backup</button>
-        </div>
-      </div>
-      <div class="small import-status" id="modal-import-status" style="margin-top:12px;">Free to use tool. Accuracy is not guaranteed.</div>
-      <div class="help-actions" style="margin-top:16px;"><button class="btn btn-secondary" type="button" id="data-close-btn">Close</button></div>
-    </div>
-  </div>
-
   <div class="loader" id="loader"><div class="loader-card" id="loader-text">Locating route…</div></div>
   <div class="toast" id="toast"></div>
 
@@ -1276,12 +1087,12 @@
     };
 
     const modeMeta = {
-      flight: { label: "Flights", icon: "✈", color: "#a855f7" },
-      train:  { label: "Trains",  icon: "🚆", color: "#8b5cf6" },
-      bus:    { label: "Buses",   icon: "🚌", color: "#c084fc" },
-      ship:   { label: "Ships",   icon: "⛴️", color: "#9333ea" },
-      car:    { label: "Cars",    icon: "🚗", color: "#d946ef" },
-      other:  { label: "Other",   icon: "✨", color: "#7c3aed" }
+      flight: { label: "Flights", icon: "✈️", color: "#60a5fa" },
+      train:  { label: "Trains",  icon: "🚆", color: "#34d399" },
+      bus:    { label: "Buses",   icon: "🚌", color: "#fb923c" },
+      ship:   { label: "Ships",   icon: "⛴️", color: "#22d3ee" },
+      car:    { label: "Cars",    icon: "🚗", color: "#f472b6" },
+      other:  { label: "Other",   icon: "✨", color: "#a78bfa" }
     };
 
     const customPlaceAliases = {
@@ -1338,29 +1149,19 @@
     function normaliseTrips(raw) {
       return (Array.isArray(raw) ? raw : [])
         .filter(t => t && Number.isFinite(+t.fromLat) && Number.isFinite(+t.fromLon) && Number.isFinite(+t.toLat) && Number.isFinite(+t.toLon))
-        .map((t, index) => ({
+        .map(t => ({
           id: t.id || generateId(),
-          seq: Number.isFinite(+t.seq) ? +t.seq : index,
           mode: modeMeta[t.mode] ? t.mode : normaliseModeInput(t.mode),
           date: normaliseDateInput(t.date || ""),
           fromLabel: repairCoordinateLabel(bestLabel(t.fromLabel, t.from, +t.fromLat, +t.fromLon, "Origin"), +t.fromLat, +t.fromLon, "Origin"),
           toLabel: repairCoordinateLabel(bestLabel(t.toLabel, t.to, +t.toLat, +t.toLon, "Destination"), +t.toLat, +t.toLon, "Destination"),
-          company: cleanCompanyValue(t.company || ""),
+          company: t.company || "",
           distance: Number.isFinite(+t.distance) ? +t.distance : haversine(+t.fromLat, +t.fromLon, +t.toLat, +t.toLon),
           fromLat: +t.fromLat,
           fromLon: +t.fromLon,
           toLat: +t.toLat,
           toLon: +t.toLon
         }));
-    }
-
-    function cleanCompanyValue(value) {
-      const v = String(value || "").trim();
-      return /^pasted\s*import$/i.test(v) ? "" : v;
-    }
-
-    function displayCompany(value) {
-      return cleanCompanyValue(value);
     }
 
     function bestLabel(preferred, raw, lat, lon, fallbackPrefix) {
@@ -1447,8 +1248,8 @@
         .arcStartLng(d => d.fromLon)
         .arcEndLat(d => d.toLat)
         .arcEndLng(d => d.toLon)
-        .arcColor(d => d.__active ? getModeColor(d.mode) : hexToRgba(getModeColor(d.mode), 0.45))
-        .arcStroke(d => d.__active ? 0.78 : 0.14)
+        .arcColor(d => getModeColor(d.mode))
+        .arcStroke(d => selectedTripId === d.id ? 0.72 : 0.42)
         .arcAltitude(d => getArcAltitude(d))
         .arcDashLength(1)
         .arcDashGap(0)
@@ -1458,12 +1259,12 @@
         .onArcClick(d => selectTrip(d.id, true))
         .pointLat(d => d.lat)
         .pointLng(d => d.lng)
-        .pointRadius(d => d.isHome ? 0.42 : (d.selected ? 0.30 : Math.min(0.28, 0.18 + Math.min(d.count || 1, 6) * 0.018)))
+        .pointRadius(d => d.selected ? 0.56 : Math.min(0.46, 0.24 + Math.min(d.count || 1, 6) * 0.035))
         .pointAltitude(0.01)
         .pointColor(d => d.color || "#93c5fd")
         .pointLabel(d => `${d.name}<br>${d.count} stop${d.count === 1 ? "" : "s"}`)
         .onPointClick(d => {
-          globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 0.58 }, 520);
+          globe.pointOfView({ lat: d.lat, lng: d.lng, altitude: 1.45 }, 900);
           showToast(d.name);
         })
         .htmlLat(d => d.lat)
@@ -1495,9 +1296,9 @@
         el.className = "vehicle-label";
         el.textContent = d.icon || "✈️";
         el.title = d.title || "Moving route";
-        if (Number.isFinite(d.rotation)) {
-          el.style.transform = `translate(-50%, -50%) rotate(${d.rotation}deg)`;
-        }
+      } else if (d.type === "arrival-label") {
+        el.className = "arrival-label";
+        el.innerHTML = `<strong>${escapeHtml(d.primary || d.name || "Arrival")}</strong><span>${escapeHtml(d.secondary || "")}</span>`;
       } else {
         el.className = "globe-label";
         el.textContent = d.name;
@@ -1507,36 +1308,20 @@
 
     function getActiveArcData() {
       if (playback && playback.queue && playback.queue[playback.index]) {
-        return [{ ...playback.queue[playback.index], __active: true }];
+        return [playback.queue[playback.index]];
       }
-      return currentFiltered.map(t => ({ ...t, __active: false }));
+      return currentFiltered;
     }
 
     function updateGlobeLayers() {
       if (!globe) return;
       const htmlItems = [];
       if (currentVehicle) htmlItems.push(currentVehicle);
+      if (currentArrivalLabel) htmlItems.push(currentArrivalLabel);
       globe
         .arcsData(getActiveArcData())
         .pointsData(currentPlaces)
         .htmlElementsData(htmlItems);
-    }
-
-    function setArrivalBanner(placeLabel = "", routeText = "") {
-      const card = document.getElementById("arrival-banner");
-      const title = document.getElementById("arrival-banner-title");
-      const subtitle = document.getElementById("arrival-banner-subtitle");
-      const route = document.getElementById("arrival-banner-route");
-      if (!card || !title || !subtitle || !route) return;
-      const parts = splitPlaceLabel(placeLabel);
-      title.textContent = parts.city || "";
-      subtitle.textContent = parts.country || "";
-      route.textContent = routeText || "";
-      card.classList.toggle("show", !!parts.city);
-    }
-
-    function clearArrivalBanner() {
-      setArrivalBanner("", "");
     }
 
     function applyGlobeTexture() {
@@ -1654,16 +1439,6 @@
       return intermediatePoint(t, 0.5);
     }
 
-    function getCompassBearing(fromPoint, toPoint) {
-      const lat1 = toRad(fromPoint.lat);
-      const lon1 = toRad(fromPoint.lng);
-      const lat2 = toRad(toPoint.lat);
-      const lon2 = toRad(toPoint.lng);
-      const y = Math.sin(lon2 - lon1) * Math.cos(lat2);
-      const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1);
-      return (toDeg(Math.atan2(y, x)) + 360) % 360;
-    }
-
     function isDomesticRoute(t) {
       const c1 = extractCountry(t.fromLabel);
       const c2 = extractCountry(t.toLabel);
@@ -1671,36 +1446,8 @@
     }
 
     function getArcAltitude(t) {
-      if ((t.distance || 0) < 1000) return 0.004;
-      if (isDomesticRoute(t)) return 0.008;
-      return Math.min(0.18, Math.max(0.04, t.distance / 75000 + 0.02));
-    }
-
-
-    function getRouteAltitude(distance) {
-      if (distance <= 120) return 0.18;
-      if (distance <= 250) return 0.26;
-      if (distance <= 500) return 0.36;
-      if (distance <= 900) return 0.48;
-      if (distance <= 1800) return 0.68;
-      if (distance <= 4000) return 0.96;
-      if (distance <= 9000) return 1.24;
-      return 1.68;
-    }
-
-    function splitPlaceLabel(label) {
-      const parts = String(label || '').split(',').map(s => s.trim()).filter(Boolean);
-      return {
-        city: parts[0] || String(label || '').trim() || 'Unknown place',
-        country: parts.length > 1 ? parts.slice(1).join(', ') : ''
-      };
-    }
-
-    function getVehicleRotation(mode, fromPoint, toPoint) {
-      const b = getCompassBearing(fromPoint, toPoint);
-      if (mode === 'flight') return b + 45;
-      if (mode === 'ship') return b;
-      return b;
+      if (isDomesticRoute(t)) return 0.006;
+      return Math.min(0.18, Math.max(0.045, t.distance / 75000 + 0.02));
     }
 
     /* ---------------------------------------------------------
@@ -1725,28 +1472,44 @@
     }
 
     function getFilteredTrips() {
-      const q = document.getElementById("search-filter").value.trim().toLowerCase();
-      const fromDate = document.getElementById("date-from-filter").value;
-      const toDate = document.getElementById("date-to-filter").value;
+      const query = document.getElementById("search-filter").value.trim().toLowerCase();
+      const year = document.getElementById("year-filter").value;
       const sort = document.getElementById("sort-filter").value;
-      const mode = settings.modeFilter || "";
+      const mode = settings.modeFilter;
 
-      let list = trips.filter(t => {
-        const matchQ = !q || [t.fromLabel, t.toLabel, displayCompany(t.company), t.mode].join(" ").toLowerCase().includes(q);
-        const matchMode = !mode || t.mode === mode;
-        const matchFrom = !fromDate || (t.date && t.date >= fromDate);
-        const matchTo = !toDate || (t.date && t.date <= toDate);
-        return matchQ && matchMode && matchFrom && matchTo;
+      const filtered = trips.filter(t => {
+        if (year && getYear(t.date) !== year) return false;
+        if (mode && t.mode !== mode) return false;
+        if (query) {
+          const haystack = [t.fromLabel, t.toLabel, t.company, t.mode, t.date].join(" ").toLowerCase();
+          if (!haystack.includes(query)) return false;
+        }
+        return true;
       });
 
-      list.sort(sort === "date-desc" ? (a, b) => sortByTripDate(b, a)
-        : sort === "distance-desc" ? (a, b) => b.distance - a.distance || sortByTripDate(a, b)
-        : sort === "distance-asc" ? (a, b) => a.distance - b.distance || sortByTripDate(a, b)
-        : sortByTripDate);
-      return list;
+      filtered.sort((a, b) => {
+        if (sort === "date-desc") return (b.date || "").localeCompare(a.date || "");
+        if (sort === "distance-desc") return b.distance - a.distance;
+        if (sort === "distance-asc") return a.distance - b.distance;
+        return (a.date || "").localeCompare(b.date || "");
+      });
+
+      return filtered;
     }
 
-    function populateYearFilter() { return; }
+    function populateYearFilter() {
+      const select = document.getElementById("year-filter");
+      const years = Array.from(new Set(trips.map(t => getYear(t.date)).filter(Boolean))).sort();
+      const current = select.value;
+      select.innerHTML = '<option value="">All years</option>';
+      years.forEach(y => {
+        const opt = document.createElement("option");
+        opt.value = y;
+        opt.textContent = y;
+        select.appendChild(opt);
+      });
+      if (years.includes(current)) select.value = current;
+    }
 
     function renderModeChips() {
       const box = document.getElementById("mode-chips");
@@ -1832,10 +1595,7 @@
       currentFiltered = getFilteredTrips();
       currentPlaces = buildPlaces(currentFiltered);
       currentLabels = buildLabels(currentPlaces);
-      if (!playback) {
-        currentArrivalLabel = null;
-        clearArrivalBanner();
-      }
+      if (!playback) currentArrivalLabel = null;
       renderStats(currentFiltered);
       renderTripList(currentFiltered);
       updateFocusPanel();
@@ -1860,8 +1620,7 @@
       });
       return Array.from(map.values()).map(p => ({
         ...p,
-        isHome: !!homeLabel && p.name === homeLabel,
-        color: (!!homeLabel && p.name === homeLabel) ? "#facc15" : "#7fb0ff",
+        color: p.selected ? "#facc15" : modeColorFromSet(p.modes),
         modes: Array.from(p.modes)
       }));
     }
@@ -1879,6 +1638,8 @@
       const dist = filtered.reduce((sum, t) => sum + t.distance, 0);
       const modeCounts = { flight: 0, train: 0, bus: 0, ship: 0, car: 0, other: 0 };
       filtered.forEach(t => { modeCounts[t.mode] = (modeCounts[t.mode] || 0) + 1; });
+      const topMode = Object.entries(modeCounts).sort((a, b) => b[1] - a[1])[0];
+
       const countries = new Set();
       const places = new Set();
       trips.forEach(t => {
@@ -1889,39 +1650,15 @@
         places.add(t.fromLabel);
         places.add(t.toLabel);
       });
-      const countryList = Array.from(countries).sort();
-      const placeList = Array.from(places).sort();
-      const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
-      setText("stat-trips", filtered.length);
-      setText("stat-countries", countries.size);
-      setText("stat-distance", filtered.length ? formatDistance(dist) : "0 km");
-      setText("stat-places", places.size);
-      setText("stat-flights", modeCounts.flight || 0);
-      setText("map-stat-trips", filtered.length);
-      setText("map-stat-countries", countries.size);
-      setText("map-stat-distance", filtered.length ? formatDistance(dist) : "0 km");
-      setText("map-stat-places", places.size);
-      setText("map-stat-flights", modeCounts.flight || 0);
-      const setTitle = (id, text) => { const el = document.getElementById(id); if (el) el.title = text; };
-      setTitle('map-stat-segments', `Visible segments: ${filtered.length}
-Flights: ${modeCounts.flight || 0}
-Trains: ${modeCounts.train || 0}
-Buses: ${modeCounts.bus || 0}
-Ships: ${modeCounts.ship || 0}
-Cars: ${modeCounts.car || 0}
-Other: ${modeCounts.other || 0}`);
-      setTitle('map-stat-countries-wrap', `Countries visited (${countryList.length})
-${countryList.join('\n') || 'None yet'}`);
-      setTitle('map-stat-distance-wrap', `Visible distance: ${filtered.length ? formatDistance(dist) : '0 km'}
 
-By mode
-${Object.entries(modeCounts).filter(([,n])=>n).map(([m,n]) => `${getModeIcon(m)} ${modeMeta[m].label}: ${n}`).join('\n') || 'None yet'}`);
-      setTitle('map-stat-places-wrap', `Places visited (${placeList.length})
-${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
-      setTitle('map-stat-flights-wrap', `Flight segments: ${modeCounts.flight || 0}`);
+      document.getElementById("stat-trips").textContent = filtered.length;
+      document.getElementById("stat-countries").textContent = countries.size;
+      document.getElementById("stat-distance").textContent = filtered.length ? formatDistance(dist) : "0 km";
+      document.getElementById("stat-places").textContent = places.size;
+      document.getElementById("stat-flights").textContent = modeCounts.flight || 0;
+      document.getElementById("stat-top-mode").textContent = topMode && topMode[1] ? getModeIcon(topMode[0]) + " " + topMode[1] : "—";
       document.getElementById("home-label-display").textContent = homeLabel || "Not set";
-      const homeTrips = homeLabel ? trips.filter(t => t.fromLabel === homeLabel || t.toLabel === homeLabel).length : 0;
-      document.getElementById("home-trip-count").textContent = homeTrips;
+      document.getElementById("home-trip-count").textContent = countHomeJourneys(trips, homeLabel);
     }
 
     function renderTripList(list) {
@@ -1946,7 +1683,7 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
         text.className = "trip-main";
         text.innerHTML = `
           <div class="trip-route">${escapeHtml(t.fromLabel)} → ${escapeHtml(t.toLabel)}</div>
-          <div class="trip-meta">${escapeHtml(t.date || "No date")} · ${escapeHtml((modeMeta[t.mode] || modeMeta.other).label.slice(0, -1) || t.mode)}${displayCompany(t.company) ? " · " + escapeHtml(displayCompany(t.company)) : ""}<br>${formatDistance(t.distance)}</div>
+          <div class="trip-meta">${escapeHtml(t.date || "No date")} · ${escapeHtml((modeMeta[t.mode] || modeMeta.other).label.slice(0, -1) || t.mode)}${t.company ? " · " + escapeHtml(t.company) : ""}<br>${formatDistance(t.distance)}</div>
         `;
 
         const actions = document.createElement("div");
@@ -2001,7 +1738,7 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
       const trip = trips.find(t => t.id === id);
       if (trip && focus) {
         const mid = midpoint(trip);
-        globe.pointOfView({ lat: mid.lat, lng: mid.lng, altitude: getRouteAltitude(trip.distance) }, 650);
+        globe.pointOfView({ lat: mid.lat, lng: mid.lng, altitude: trip.distance > 9000 ? 1.85 : 1.35 }, 900);
       }
       renderAll();
     }
@@ -2029,7 +1766,7 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
 
     function focusMostCommonPlace() {
       const place = getMostCommonPlace();
-      if (place) globe.pointOfView({ lat: place.lat, lng: place.lng, altitude: 1.18 }, 900);
+      if (place) globe.pointOfView({ lat: place.lat, lng: place.lng, altitude: 1.55 }, 1100);
       else globe.pointOfView({ lat: -25, lng: 135, altitude: 2.3 }, 1000);
     }
 
@@ -2050,12 +1787,11 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
         return;
       }
       stopPlayback(false);
-      playback = { queue, index: 0, startedAt: null, total: queue.length, pauseUntil: null };
+      playback = { queue, index: 0, startedAt: null, total: queue.length };
       currentArrivalLabel = null;
-      clearArrivalBanner();
       selectedTripId = queue[0].id;
       const firstMid = midpoint(queue[0]);
-      globe.pointOfView({ lat: firstMid.lat, lng: firstMid.lng, altitude: getRouteAltitude(queue[0].distance) }, 520);
+      globe.pointOfView({ lat: firstMid.lat, lng: firstMid.lng, altitude: queue[0].distance > 9000 ? 1.85 : 1.35 }, 750);
       updateFocusPanel(0);
       updateGlobeLayers();
       showToast(`Playing ${queue.length} trips in chronological order.`);
@@ -2067,33 +1803,17 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
       const trip = playback.queue[playback.index];
       if (!trip) return stopPlayback(true);
 
-      if (playback.pauseUntil && timestamp < playback.pauseUntil) {
-        currentVehicle = {
-          type: "vehicle",
-          lat: trip.fromLat,
-          lng: trip.fromLon,
-          icon: getModeIcon(trip.mode),
-          rotation: getVehicleRotation(trip.mode, { lat: trip.fromLat, lng: trip.fromLon }, midpoint(trip)),
-          title: `${trip.fromLabel} → ${trip.toLabel}`
-        };
-        setArrivalBanner(trip.toLabel, `${trip.fromLabel} → ${trip.toLabel}`);
-        updateGlobeLayers();
-        playbackFrame = requestAnimationFrame(stepPlayback);
-        return;
+      if (currentArrivalLabel && currentArrivalLabel.expiresAt && timestamp >= currentArrivalLabel.expiresAt) {
+        currentArrivalLabel = null;
       }
-      if (playback.pauseUntil && timestamp >= playback.pauseUntil) playback.pauseUntil = null;
 
-      if (!playback.startedAt) {
-        playback.startedAt = timestamp;
-        setArrivalBanner(trip.toLabel, `${trip.fromLabel} → ${trip.toLabel}`);
-      }
+      if (!playback.startedAt) playback.startedAt = timestamp;
       const speed = +document.getElementById("speed-slider").value || 1;
       const baseDuration = Math.max(950, Math.min(3400, 1050 + trip.distance / 7));
       const duration = baseDuration / speed;
-      const raw = Math.min(1, Math.max(0, (timestamp - playback.startedAt) / duration));
+      const raw = Math.min(1, (timestamp - playback.startedAt) / duration);
       const eased = easeInOut(raw);
       const pos = intermediatePoint(trip, eased);
-      const ahead = intermediatePoint(trip, Math.min(1, eased + 0.02));
 
       selectedTripId = trip.id;
       currentVehicle = {
@@ -2101,9 +1821,19 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
         lat: pos.lat,
         lng: pos.lng,
         icon: getModeIcon(trip.mode),
-        rotation: getVehicleRotation(trip.mode, pos, ahead),
         title: `${trip.fromLabel} → ${trip.toLabel}`
       };
+
+      if (raw >= 0.86) {
+        currentArrivalLabel = {
+          type: "arrival-label",
+          lat: trip.toLat,
+          lng: trip.toLon,
+          primary: trip.toLabel.split(',')[0],
+          secondary: extractCountry(trip.toLabel) || trip.toLabel,
+          expiresAt: timestamp + 420
+        };
+      }
 
       const overallProgress = playback.total ? (playback.index + raw) / playback.total : raw;
       updateFocusPanel(overallProgress);
@@ -2115,25 +1845,29 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
           lat: trip.toLat,
           lng: trip.toLon,
           icon: getModeIcon(trip.mode),
-          rotation: getVehicleRotation(trip.mode, intermediatePoint(trip, 0.98), { lat: trip.toLat, lng: trip.toLon }),
           title: `${trip.fromLabel} → ${trip.toLabel}`
         };
-        setArrivalBanner(trip.toLabel, `${trip.fromLabel} → ${trip.toLabel}`);
-        updateGlobeLayers();
+        currentArrivalLabel = {
+          type: "arrival-label",
+          lat: trip.toLat,
+          lng: trip.toLon,
+          primary: trip.toLabel.split(',')[0],
+          secondary: extractCountry(trip.toLabel) || trip.toLabel,
+          expiresAt: timestamp + 900
+        };
 
         playback.index += 1;
         if (playback.index >= playback.queue.length) {
+          updateGlobeLayers();
           stopPlayback(true);
           return;
         }
         const next = playback.queue[playback.index];
+        playback.startedAt = timestamp;
         selectedTripId = next.id;
-        playback.startedAt = null;
-        const needsRecenter = next.distance > 1600 || playback.index % 4 === 0;
-        if (needsRecenter) {
+        if (next.distance > 1600 || playback.index % 5 === 0) {
           const mid = midpoint(next);
-          globe.pointOfView({ lat: mid.lat, lng: mid.lng, altitude: getRouteAltitude(next.distance) }, 220);
-          playback.pauseUntil = timestamp + 180;
+          globe.pointOfView({ lat: mid.lat, lng: mid.lng, altitude: next.distance > 9000 ? 1.85 : 1.35 }, 520);
         }
       }
       playbackFrame = requestAnimationFrame(stepPlayback);
@@ -2144,11 +1878,10 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
       playbackFrame = null;
       playback = null;
       currentVehicle = null;
-      currentArrivalLabel = null;
+      if (!showDone) currentArrivalLabel = null;
       document.getElementById("progress-bar").style.width = showDone ? "100%" : "0%";
       updateGlobeLayers();
       if (showDone) showToast("Playback complete.");
-      else clearArrivalBanner();
     }
 
     /* ---------------------------------------------------------
@@ -2342,12 +2075,11 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
           const distance = Number.isFinite(row.distance) && row.distance > 0 ? row.distance : haversine(g1.lat, g1.lon, g2.lat, g2.lon);
           trips.push({
             id: generateId(),
-            seq: getNextSeq(),
             mode: normaliseModeInput(row.mode),
             date: normaliseDateInput(row.date),
             fromLabel: g1.label || row.from,
             toLabel: g2.label || row.to,
-            company: cleanCompanyValue(row.company || ""),
+            company: row.company || sourceLabel || "",
             distance,
             fromLat: g1.lat,
             fromLon: g1.lon,
@@ -2373,8 +2105,6 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
     function setImportStatus(message) {
       const el = document.getElementById("import-status");
       if (el) el.textContent = message;
-      const modal = document.getElementById("modal-import-status");
-      if (modal) modal.textContent = message;
     }
 
     async function importGrid(grid, sourceLabel) {
@@ -2398,9 +2128,6 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
       const da = Date.parse(a.date || "") || 0;
       const db = Date.parse(b.date || "") || 0;
       if (da !== db) return da - db;
-      const sa = Number.isFinite(+a.seq) ? +a.seq : 0;
-      const sb = Number.isFinite(+b.seq) ? +b.seq : 0;
-      if (sa !== sb) return sa - sb;
       return (a.date || "").localeCompare(b.date || "") || a.fromLabel.localeCompare(b.fromLabel) || a.toLabel.localeCompare(b.toLabel);
     }
 
@@ -2450,7 +2177,7 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
         trip.date = date;
         trip.fromLabel = g1.label || from;
         trip.toLabel = g2.label || to;
-        trip.company = cleanCompanyValue(company);
+        trip.company = company;
         trip.fromLat = +g1.lat;
         trip.fromLon = +g1.lon;
         trip.toLat = +g2.lat;
@@ -2541,7 +2268,7 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
         ["flight", "2025-09-01", "Sydney, Australia", "Queenstown, New Zealand", "Demo flight", -33.8688, 151.2093, -45.0312, 168.6626]
       ];
       demo.forEach(([mode, date, fromLabel, toLabel, company, fromLat, fromLon, toLat, toLon]) => {
-        trips.push({ id: generateId(), seq: getNextSeq(), mode, date, fromLabel, toLabel, company: cleanCompanyValue(company), fromLat, fromLon, toLat, toLon, distance: haversine(fromLat, fromLon, toLat, toLon) });
+        trips.push({ id: generateId(), mode, date, fromLabel, toLabel, company, fromLat, fromLon, toLat, toLon, distance: haversine(fromLat, fromLon, toLat, toLon) });
       });
       saveTrips();
       renderAll();
@@ -2581,7 +2308,7 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
       }
     };
 
-    ["search-filter", "date-from-filter", "date-to-filter", "sort-filter"].forEach(id => {
+    ["search-filter", "year-filter", "sort-filter"].forEach(id => {
       document.getElementById(id).addEventListener("input", () => {
         stopPlayback(false);
         renderAll();
@@ -2594,8 +2321,7 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
 
     document.getElementById("reset-filters-btn").onclick = () => {
       document.getElementById("search-filter").value = "";
-      document.getElementById("date-from-filter").value = "";
-      document.getElementById("date-to-filter").value = "";
+      document.getElementById("year-filter").value = "";
       document.getElementById("sort-filter").value = "date-asc";
       settings.modeFilter = "";
       saveSettings();
@@ -2605,32 +2331,6 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
     document.getElementById("play-visible-btn").onclick = () => playTrips(getChronologicalIds(trips));
     document.getElementById("focus-all-btn").onclick = focusAll;
     document.getElementById("stop-btn").onclick = () => stopPlayback(false);
-
-    document.getElementById("help-btn").onclick = openHelpOverlay;
-    document.getElementById("help-later-btn").onclick = closeHelpOverlay;
-    document.getElementById("help-start-btn").onclick = closeHelpOverlay;
-    document.getElementById("help-overlay").addEventListener('click', e => {
-      if (e.target.id === 'help-overlay') closeHelpOverlay();
-    });
-    document.getElementById("data-tools-btn").onclick = () => { syncModalPasteFields(); openDataOverlay(); };
-    document.getElementById("data-close-btn").onclick = closeDataOverlay;
-    document.getElementById("data-overlay").addEventListener('click', e => {
-      if (e.target.id === 'data-overlay') closeDataOverlay();
-    });
-    document.getElementById("modal-import-paste-btn").onclick = async () => {
-      syncMainPasteField();
-      await handlePastedImport(document.getElementById('modal-bulk-paste').value, 'Pasted import');
-    };
-    document.getElementById("modal-upload-sheet-btn").onclick = () => document.getElementById('sheet-input').click();
-    document.getElementById("modal-sample-import-btn").onclick = () => {
-      document.getElementById('modal-bulk-paste').value = "date	from	to	mode	company
-2025-06-14	Sydney	Osaka	flight	Qantas
-2025-06-18	Osaka	Tokyo	train	Shinkansen";
-      syncMainPasteField();
-    };
-    document.getElementById("modal-export-btn").onclick = () => document.getElementById('export-btn').click();
-    document.getElementById("modal-backup-json-btn").onclick = () => document.getElementById('backup-json-btn').click();
-    document.getElementById("modal-restore-json-btn").onclick = () => document.getElementById('restore-json-btn').click();
 
     document.getElementById("theme-btn").onclick = () => {
       settings.dark = !settings.dark;
@@ -2754,38 +2454,6 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
       URL.revokeObjectURL(url);
     }
 
-    function openHelpOverlay() {
-      const el = document.getElementById('help-overlay');
-      if (el) el.classList.add('show');
-    }
-
-    function closeHelpOverlay() {
-      const el = document.getElementById('help-overlay');
-      if (el) el.classList.remove('show');
-    }
-
-    function openDataOverlay() {
-      const el = document.getElementById('data-overlay');
-      if (el) el.classList.add('show');
-    }
-
-    function closeDataOverlay() {
-      const el = document.getElementById('data-overlay');
-      if (el) el.classList.remove('show');
-    }
-
-    function syncModalPasteFields() {
-      const main = document.getElementById('bulk-paste');
-      const modal = document.getElementById('modal-bulk-paste');
-      if (main && modal) modal.value = main.value;
-    }
-
-    function syncMainPasteField() {
-      const main = document.getElementById('bulk-paste');
-      const modal = document.getElementById('modal-bulk-paste');
-      if (main && modal) main.value = modal.value;
-    }
-
     /* ---------------------------------------------------------
        UI HELPERS
     --------------------------------------------------------- */
@@ -2842,7 +2510,6 @@ ${placeList.slice(0, 40).join('\n')}${placeList.length > 40 ? '\n…' : ''}`);
     setTimeout(() => {
       resizeGlobe();
       focusMostCommonPlace();
-      openHelpOverlay();
     }, 250);
   </script>
 </body>
