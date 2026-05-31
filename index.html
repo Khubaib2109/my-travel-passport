@@ -123,10 +123,10 @@
     }
 
     .brand-card {
-      padding: 26px 22px 24px;
+      padding: 16px 18px 15px;
       position: relative;
       overflow: hidden;
-      min-height: 245px;
+      min-height: 132px;
     }
 
     .brand-card::after {
@@ -150,18 +150,18 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(2.15rem, 1.5rem + 1.25vw, 2.85rem);
-      letter-spacing: -0.065em;
-      line-height: 0.98;
-      padding-top: 2px;
+      font-size: clamp(1.65rem, 1.22rem + 0.95vw, 2.15rem);
+      letter-spacing: -0.055em;
+      line-height: 1.02;
+      padding-top: 1px;
       max-width: 100%;
       text-wrap: balance;
     }
 
     .subtitle {
-      margin: 18px 0 0;
+      margin: 9px 0 0;
       color: var(--muted);
-      font-size: 0.96rem;
+      font-size: 0.86rem;
       line-height: 1.35;
       position: relative;
       z-index: 1;
@@ -311,18 +311,19 @@
 
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(5, minmax(96px, 1fr));
       gap: 9px;
     }
 
     .stat {
-      min-height: 74px;
-      padding: 11px;
-      border-radius: 19px;
+      min-height: 68px;
+      padding: 10px;
+      border-radius: 18px;
       background: var(--surface-strong);
       border: 1px solid var(--line);
-      overflow: hidden;
+      overflow: visible;
       position: relative;
+      cursor: help;
     }
 
     .stat::after {
@@ -352,6 +353,62 @@
       z-index: 1;
     }
 
+    .stat-tooltip {
+      position: absolute;
+      left: 50%;
+      top: calc(100% + 10px);
+      transform: translateX(-50%) translateY(-4px);
+      width: min(340px, 80vw);
+      max-height: 320px;
+      overflow: auto;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 30;
+      padding: 11px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.94);
+      color: #e5e7eb;
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 18px 42px rgba(0,0,0,0.35);
+      font-size: 0.75rem;
+      line-height: 1.35;
+      transition: opacity 0.16s ease, transform 0.16s ease;
+    }
+
+    .stat:hover .stat-tooltip,
+    .stat:focus-within .stat-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .stat-tooltip strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.78rem;
+      color: #ffffff;
+    }
+
+    .stat-tooltip table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+
+    .stat-tooltip td,
+    .stat-tooltip th {
+      padding: 4px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .stat-tooltip th:last-child,
+    .stat-tooltip td:last-child {
+      text-align: right;
+      padding-left: 8px;
+      white-space: nowrap;
+    }
+
     .home-row {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -361,8 +418,15 @@
 
     .filters {
       display: grid;
-      grid-template-columns: 1.1fr 0.95fr 0.95fr;
+      grid-template-columns: 1fr 0.78fr 0.78fr 0.9fr;
       gap: 8px;
+    }
+
+    .filters-panel {
+      position: sticky;
+      top: 0;
+      z-index: 14;
+      box-shadow: var(--shadow);
     }
 
     .mode-chips {
@@ -506,11 +570,70 @@
       background: #020617;
     }
 
-    .topbar {
+    .map-dashboard {
       position: absolute;
       left: 16px;
       right: 16px;
       top: 16px;
+      z-index: 8;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: start;
+      pointer-events: none;
+    }
+
+    .map-stats-card {
+      pointer-events: auto;
+      background: rgba(15, 23, 42, 0.76);
+      color: #e5e7eb;
+    }
+
+    .map-stats-card .stat {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .map-stats-card .stat-label,
+    .map-stats-card .small {
+      color: rgba(226,232,240,0.78);
+    }
+
+    .dashboard-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, 360px);
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 10px;
+    }
+
+    .dashboard-head h2 {
+      color: #fff;
+      font-size: 0.94rem;
+    }
+
+    .dashboard-actions {
+      pointer-events: auto;
+      min-width: 190px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(15, 23, 42, 0.76);
+    }
+
+    .dashboard-actions .btn,
+    .dashboard-actions .btn-secondary {
+      width: 100%;
+      padding: 9px 11px;
+      font-size: 0.78rem;
+      box-shadow: none;
+    }
+
+    .topbar {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 152px;
       display: flex;
       justify-content: space-between;
       gap: 10px;
@@ -680,6 +803,7 @@
       border: none;
       box-shadow: none;
       transform: translate(-50%, -50%);
+      transform-origin: 50% 50%;
       pointer-events: none;
       text-shadow: 0 3px 10px rgba(0,0,0,0.75);
       filter: drop-shadow(0 2px 5px rgba(0,0,0,0.45));
@@ -808,21 +932,27 @@
       }
 
       .brand-card {
-        min-height: 245px;
+        min-height: 126px;
       }
 
       .subtitle {
         max-width: 100%;
       }
 
-      .form-grid, .filters, .stats-grid {
+      .form-grid, .filters, .stats-grid, .dashboard-head, .map-dashboard {
         grid-template-columns: 1fr;
+      }
+
+      .map-dashboard {
+        left: 10px;
+        right: 10px;
+        top: 10px;
       }
 
       .topbar {
         left: 10px;
         right: 10px;
-        top: 10px;
+        top: 245px;
         display: grid;
       }
 
@@ -897,48 +1027,8 @@
         </form>
       </section>
 
-      <section class="panel">
-        <div class="section-title">
-          <h2>Bulk import</h2>
-          <span class="small">Paste Excel or upload CSV/XLSX</span>
-        </div>
-        <p class="small import-help">
-          Use columns like <strong>date</strong>, <strong>from</strong>, <strong>to</strong>, <strong>mode</strong>, <strong>company</strong>. You can paste directly from Excel/Google Sheets, or upload a spreadsheet.
-        </p>
-        <textarea id="bulk-paste" placeholder="date	from	to	mode	company
-2025-06-14	Sydney	Osaka	flight	Qantas
-2025-06-18	Osaka	Tokyo	train	Shinkansen"></textarea>
-        <div class="actions">
-          <button class="btn btn-secondary" type="button" id="import-paste-btn">＋ Import pasted rows</button>
-          <button class="btn btn-secondary" type="button" id="upload-sheet-btn">⬆ Upload spreadsheet</button>
-          <button class="chip" type="button" id="sample-import-btn">Insert sample</button>
-        </div>
-        <input id="sheet-input" type="file" accept=".csv,.tsv,.txt,.xlsx,.xls" hidden />
-        <div class="small import-status" id="import-status">No spreadsheet loaded yet.</div>
-      </section>
-
-      <section class="panel">
-        <div class="section-title">
-          <h2>Stats</h2>
-          <span class="small">Visible filters + all-time countries</span>
-        </div>
-        <div class="home-row">
-          <input id="home-input" placeholder="Set home city, e.g. Sydney" />
-          <button class="btn btn-secondary" type="button" id="set-home-btn">Set</button>
-        </div>
-        <div class="small" style="margin-bottom:10px;">Home: <strong id="home-label-display">Not set</strong> · Full trips from home: <strong id="home-trip-count">0</strong></div>
-        <div class="stats-grid">
-          <div class="stat"><div class="stat-value" id="stat-trips">0</div><div class="stat-label">Segments</div></div>
-          <div class="stat"><div class="stat-value" id="stat-countries">0</div><div class="stat-label">Countries</div></div>
-          <div class="stat"><div class="stat-value" id="stat-distance">0 km</div><div class="stat-label">Distance</div></div>
-          <div class="stat"><div class="stat-value" id="stat-places">0</div><div class="stat-label">Places</div></div>
-          <div class="stat"><div class="stat-value" id="stat-flights">0</div><div class="stat-label">Flights</div></div>
-          <div class="stat"><div class="stat-value" id="stat-top-mode">—</div><div class="stat-label">Top mode</div></div>
-        </div>
-      </section>
-
       <div class="panel-scroll">
-        <section class="panel">
+        <section class="panel filters-panel" id="filters-panel">
           <div class="section-title">
             <h2>Filters</h2>
             <button class="chip" type="button" id="reset-filters-btn">Reset</button>
@@ -949,8 +1039,12 @@
               <input id="search-filter" placeholder="city, country, airline..." />
             </div>
             <div class="field">
-              <label for="year-filter">Year</label>
-              <select id="year-filter"><option value="">All years</option></select>
+              <label for="date-from-filter">From date</label>
+              <input type="date" id="date-from-filter" />
+            </div>
+            <div class="field">
+              <label for="date-to-filter">To date</label>
+              <input type="date" id="date-to-filter" />
             </div>
             <div class="field">
               <label for="sort-filter">Sort</label>
@@ -977,28 +1071,46 @@
           <div class="trip-list" id="trip-list"></div>
         </section>
 
-        <section class="panel" id="export-panel" style="margin-top:14px;">
-          <div class="section-title">
-            <h2>Export / backup</h2>
-            <span class="small">CSV + JSON</span>
-          </div>
-          <div class="actions">
-            <button class="btn btn-secondary btn-wide" type="button" id="export-btn">Export CSV</button>
-            <button class="btn btn-secondary btn-wide" type="button" id="backup-json-btn">Download backup JSON</button>
-            <button class="btn btn-secondary btn-wide" type="button" id="restore-json-btn">Restore from backup</button>
-          </div>
-          <p class="small" style="margin:10px 0 0;">Use CSV for spreadsheets. Use JSON backup to preserve all coordinates and settings.</p>
-        </section>
       </div>
     </aside>
 
     <main class="globe-card">
       <div id="globeViz" aria-label="Interactive 3D travel globe"></div>
 
+      <div class="map-dashboard">
+        <div class="floating-card map-stats-card">
+          <div class="dashboard-head">
+            <div>
+              <h2>Trip stats</h2>
+              <div class="small">Hover over a stat to see the calculation behind it.</div>
+            </div>
+            <div>
+              <div class="home-row" style="margin-bottom:6px;">
+                <input id="home-input" placeholder="Set home city, e.g. Sydney" />
+                <button class="btn btn-secondary" type="button" id="set-home-btn">Set</button>
+              </div>
+              <div class="small">Home: <strong id="home-label-display">Not set</strong> · Full trips from home: <strong id="home-trip-count">0</strong></div>
+            </div>
+          </div>
+          <div class="stats-grid map-stats-grid">
+            <div class="stat" id="stat-card-trips" tabindex="0"><div class="stat-value" id="stat-trips">0</div><div class="stat-label">Segments</div><div class="stat-tooltip" id="tooltip-trips"></div></div>
+            <div class="stat" id="stat-card-countries" tabindex="0"><div class="stat-value" id="stat-countries">0</div><div class="stat-label">Countries</div><div class="stat-tooltip" id="tooltip-countries"></div></div>
+            <div class="stat" id="stat-card-distance" tabindex="0"><div class="stat-value" id="stat-distance">0 km</div><div class="stat-label">Distance</div><div class="stat-tooltip" id="tooltip-distance"></div></div>
+            <div class="stat" id="stat-card-places" tabindex="0"><div class="stat-value" id="stat-places">0</div><div class="stat-label">Places</div><div class="stat-tooltip" id="tooltip-places"></div></div>
+            <div class="stat" id="stat-card-flights" tabindex="0"><div class="stat-value" id="stat-flights">0</div><div class="stat-label">Flights</div><div class="stat-tooltip" id="tooltip-flights"></div></div>
+          </div>
+        </div>
+        <div class="floating-card dashboard-actions">
+          <button class="btn" type="button" id="data-tools-btn">⬆ Import / export</button>
+          <button class="btn btn-secondary" type="button" id="play-visible-btn-top">▶ Play visible</button>
+          <button class="btn btn-secondary" type="button" id="focus-all-btn-top">◎ Focus all</button>
+        </div>
+      </div>
+
       <div class="topbar">
         <div class="floating-card map-help">
           <strong>Drag to rotate · scroll to zoom</strong>
-          Click a route card to focus it. Press play to watch the plane move through your trips in chronological order.
+          Click a route card to focus it. Press play to watch your trips in chronological order. Free to use, but route/geocoding accuracy is not guaranteed.
         </div>
         <div class="floating-card globe-controls">
           <button class="btn btn-secondary" type="button" id="theme-btn">🌙 Dark</button>
@@ -1069,6 +1181,47 @@
           <button class="btn btn-secondary" type="button" id="edit-cancel-btn">Cancel</button>
         </div>
       </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="data-modal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div>
+          <h2>Import / export</h2>
+          <div class="small">Paste Excel rows, upload a spreadsheet, or export your saved travel data.</div>
+        </div>
+        <button class="modal-close" type="button" id="data-close-btn">×</button>
+      </div>
+
+      <div class="section-title" style="margin-top:8px;">
+        <h2>Bulk import</h2>
+        <span class="small">Paste Excel or upload CSV/XLSX</span>
+      </div>
+      <p class="small import-help">
+        Use columns like <strong>date</strong>, <strong>from</strong>, <strong>to</strong>, <strong>mode</strong>, <strong>company</strong>. You can paste directly from Excel/Google Sheets, or upload a spreadsheet.
+      </p>
+      <textarea id="bulk-paste" placeholder="date	from	to	mode	company
+2025-06-14	Sydney	Osaka	flight	Qantas
+2025-06-18	Osaka	Tokyo	train	Shinkansen"></textarea>
+      <div class="actions">
+        <button class="btn btn-secondary" type="button" id="import-paste-btn">＋ Import pasted rows</button>
+        <button class="btn btn-secondary" type="button" id="upload-sheet-btn">⬆ Upload spreadsheet</button>
+        <button class="chip" type="button" id="sample-import-btn">Insert sample</button>
+      </div>
+      <input id="sheet-input" type="file" accept=".csv,.tsv,.txt,.xlsx,.xls" hidden />
+      <div class="small import-status" id="import-status">No spreadsheet loaded yet.</div>
+
+      <div class="section-title" style="margin-top:18px;">
+        <h2>Export / backup</h2>
+        <span class="small">CSV + JSON</span>
+      </div>
+      <div class="actions">
+        <button class="btn btn-secondary" type="button" id="export-btn">Export CSV</button>
+        <button class="btn btn-secondary" type="button" id="backup-json-btn">Download backup JSON</button>
+        <button class="btn btn-secondary" type="button" id="restore-json-btn">Restore from backup</button>
+      </div>
+      <p class="small" style="margin:10px 0 0;">Use CSV for spreadsheets. Use JSON backup to preserve all coordinates and settings.</p>
     </div>
   </div>
 
@@ -1149,19 +1302,29 @@
     function normaliseTrips(raw) {
       return (Array.isArray(raw) ? raw : [])
         .filter(t => t && Number.isFinite(+t.fromLat) && Number.isFinite(+t.fromLon) && Number.isFinite(+t.toLat) && Number.isFinite(+t.toLon))
-        .map(t => ({
+        .map((t, index) => ({
           id: t.id || generateId(),
+          sequence: Number.isFinite(+t.sequence) ? +t.sequence : index,
           mode: modeMeta[t.mode] ? t.mode : normaliseModeInput(t.mode),
           date: normaliseDateInput(t.date || ""),
           fromLabel: repairCoordinateLabel(bestLabel(t.fromLabel, t.from, +t.fromLat, +t.fromLon, "Origin"), +t.fromLat, +t.fromLon, "Origin"),
           toLabel: repairCoordinateLabel(bestLabel(t.toLabel, t.to, +t.toLat, +t.toLon, "Destination"), +t.toLat, +t.toLon, "Destination"),
-          company: t.company || "",
+          company: cleanCompanyNote(t.company || ""),
           distance: Number.isFinite(+t.distance) ? +t.distance : haversine(+t.fromLat, +t.fromLon, +t.toLat, +t.toLon),
           fromLat: +t.fromLat,
           fromLon: +t.fromLon,
           toLat: +t.toLat,
           toLon: +t.toLon
         }));
+    }
+
+    function cleanCompanyNote(value) {
+      const note = String(value || "").trim();
+      return /^pasted[\s_-]*import$/i.test(note) ? "" : note;
+    }
+
+    function getNextSequence() {
+      return trips.reduce((max, t, index) => Math.max(max, Number.isFinite(+t.sequence) ? +t.sequence : index), -1) + 1;
     }
 
     function bestLabel(preferred, raw, lat, lon, fallbackPrefix) {
@@ -1248,8 +1411,8 @@
         .arcStartLng(d => d.fromLon)
         .arcEndLat(d => d.toLat)
         .arcEndLng(d => d.toLon)
-        .arcColor(d => getModeColor(d.mode))
-        .arcStroke(d => selectedTripId === d.id ? 0.72 : 0.42)
+        .arcColor(d => getRouteColor(d))
+        .arcStroke(d => selectedTripId === d.id ? 0.95 : 0.62)
         .arcAltitude(d => getArcAltitude(d))
         .arcDashLength(1)
         .arcDashGap(0)
@@ -1296,6 +1459,8 @@
         el.className = "vehicle-label";
         el.textContent = d.icon || "✈️";
         el.title = d.title || "Moving route";
+        const rotation = Number.isFinite(+d.rotation) ? +d.rotation : 0;
+        el.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
       } else if (d.type === "arrival-label") {
         el.className = "arrival-label";
         el.innerHTML = `<strong>${escapeHtml(d.primary || d.name || "Arrival")}</strong><span>${escapeHtml(d.secondary || "")}</span>`;
@@ -1435,8 +1600,35 @@
     function normaliseLng(lng) { return ((lng + 540) % 360) - 180; }
     function easeInOut(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
 
+    function linearPoint(t, f) {
+      return {
+        lat: t.fromLat + (t.toLat - t.fromLat) * f,
+        lng: normaliseLng(t.fromLon + normaliseLng(t.toLon - t.fromLon) * f)
+      };
+    }
+
+    function routePoint(t, f) {
+      return t.distance < 1000 ? linearPoint(t, f) : intermediatePoint(t, f);
+    }
+
     function midpoint(t) {
-      return intermediatePoint(t, 0.5);
+      return routePoint(t, 0.5);
+    }
+
+    function initialBearing(a, b) {
+      const lat1 = toRad(a.lat);
+      const lat2 = toRad(b.lat);
+      const dLon = toRad(normaliseLng(b.lng - a.lng));
+      const y = Math.sin(dLon) * Math.cos(lat2);
+      const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+      return (toDeg(Math.atan2(y, x)) + 360) % 360;
+    }
+
+    function getVehicleRotation(t, f) {
+      if (t.mode !== "flight") return 0;
+      const here = routePoint(t, Math.max(0, Math.min(1, f)));
+      const there = routePoint(t, Math.max(0, Math.min(1, f + 0.015)));
+      return initialBearing(here, there) - 45;
     }
 
     function isDomesticRoute(t) {
@@ -1446,17 +1638,14 @@
     }
 
     function getArcAltitude(t) {
-      if (isDomesticRoute(t)) return 0.006;
-      return Math.min(0.18, Math.max(0.045, t.distance / 75000 + 0.02));
+      if (t.distance < 1000) return 0.001;
+      if (isDomesticRoute(t)) return 0.008;
+      return Math.min(0.20, Math.max(0.055, t.distance / 70000 + 0.025));
     }
 
     /* ---------------------------------------------------------
        FILTERS + STATS
     --------------------------------------------------------- */
-    function getYear(dateStr) {
-      return dateStr ? dateStr.slice(0, 4) : "";
-    }
-
     function extractCountry(label) {
       if (!label) return "";
       const i = label.lastIndexOf(",");
@@ -1467,18 +1656,25 @@
       return (modeMeta[mode] || modeMeta.other).color;
     }
 
+    function getRouteColor(d) {
+      return selectedTripId === d.id ? "#f0abfc" : "#c084fc";
+    }
+
     function getModeIcon(mode) {
       return (modeMeta[mode] || modeMeta.other).icon;
     }
 
     function getFilteredTrips() {
       const query = document.getElementById("search-filter").value.trim().toLowerCase();
-      const year = document.getElementById("year-filter").value;
+      const dateFrom = document.getElementById("date-from-filter").value;
+      const dateTo = document.getElementById("date-to-filter").value;
       const sort = document.getElementById("sort-filter").value;
       const mode = settings.modeFilter;
 
       const filtered = trips.filter(t => {
-        if (year && getYear(t.date) !== year) return false;
+        const d = t.date || "";
+        if (dateFrom && (!d || d < dateFrom)) return false;
+        if (dateTo && (!d || d > dateTo)) return false;
         if (mode && t.mode !== mode) return false;
         if (query) {
           const haystack = [t.fromLabel, t.toLabel, t.company, t.mode, t.date].join(" ").toLowerCase();
@@ -1495,20 +1691,6 @@
       });
 
       return filtered;
-    }
-
-    function populateYearFilter() {
-      const select = document.getElementById("year-filter");
-      const years = Array.from(new Set(trips.map(t => getYear(t.date)).filter(Boolean))).sort();
-      const current = select.value;
-      select.innerHTML = '<option value="">All years</option>';
-      years.forEach(y => {
-        const opt = document.createElement("option");
-        opt.value = y;
-        opt.textContent = y;
-        select.appendChild(opt);
-      });
-      if (years.includes(current)) select.value = current;
     }
 
     function renderModeChips() {
@@ -1590,7 +1772,6 @@
        RENDERING
     --------------------------------------------------------- */
     function renderAll() {
-      populateYearFilter();
       renderModeChips();
       currentFiltered = getFilteredTrips();
       currentPlaces = buildPlaces(currentFiltered);
@@ -1638,7 +1819,6 @@
       const dist = filtered.reduce((sum, t) => sum + t.distance, 0);
       const modeCounts = { flight: 0, train: 0, bus: 0, ship: 0, car: 0, other: 0 };
       filtered.forEach(t => { modeCounts[t.mode] = (modeCounts[t.mode] || 0) + 1; });
-      const topMode = Object.entries(modeCounts).sort((a, b) => b[1] - a[1])[0];
 
       const countries = new Set();
       const places = new Set();
@@ -1656,11 +1836,33 @@
       document.getElementById("stat-distance").textContent = filtered.length ? formatDistance(dist) : "0 km";
       document.getElementById("stat-places").textContent = places.size;
       document.getElementById("stat-flights").textContent = modeCounts.flight || 0;
-      document.getElementById("stat-top-mode").textContent = topMode && topMode[1] ? getModeIcon(topMode[0]) + " " + topMode[1] : "—";
       document.getElementById("home-label-display").textContent = homeLabel || "Not set";
       document.getElementById("home-trip-count").textContent = countHomeJourneys(trips, homeLabel);
+
+      const sortedCountries = Array.from(countries).sort((a, b) => a.localeCompare(b));
+      const sortedPlaces = Array.from(places).sort((a, b) => a.localeCompare(b));
+      const filteredChrono = filtered.slice().sort(sortByTripDate);
+      const longestRoutes = filtered.slice().sort((a, b) => b.distance - a.distance).slice(0, 8);
+      const distanceByMode = Object.entries(modeCounts)
+        .filter(([, count]) => count)
+        .map(([mode]) => ({ mode, km: filtered.filter(t => t.mode === mode).reduce((sum, t) => sum + t.distance, 0) }))
+        .sort((a, b) => b.km - a.km);
+
+      setStatTooltip("tooltip-trips", `<strong>Segments shown</strong>${filtered.length} route segment${filtered.length === 1 ? "" : "s"} currently match the search, date range and mode filters.${filteredChrono.length ? `<table><tr><th>First</th><td>${escapeHtml(filteredChrono[0].date || "No date")}</td></tr><tr><th>Last</th><td>${escapeHtml(filteredChrono[filteredChrono.length - 1].date || "No date")}</td></tr></table>` : ""}`);
+      setStatTooltip("tooltip-countries", `<strong>Countries visited</strong><div>${sortedCountries.length ? escapeHtml(sortedCountries.join(", ")) : "No countries found yet."}</div>`);
+      setStatTooltip("tooltip-distance", `<strong>Distance calculation</strong>Total of visible route distances: ${formatDistance(dist)}.${distanceByMode.length ? `<table><tr><th>Mode</th><th>Distance</th></tr>${distanceByMode.map(row => `<tr><td>${getModeIcon(row.mode)} ${escapeHtml((modeMeta[row.mode] || modeMeta.other).label)}</td><td>${formatDistance(row.km)}</td></tr>`).join("")}</table>` : ""}${longestRoutes.length ? `<table><tr><th>Longest visible routes</th><th>km</th></tr>${longestRoutes.map(t => `<tr><td>${escapeHtml(shortPlace(t.fromLabel))} → ${escapeHtml(shortPlace(t.toLabel))}</td><td>${formatDistance(t.distance)}</td></tr>`).join("")}</table>` : ""}`);
+      setStatTooltip("tooltip-places", `<strong>Unique places</strong><div>${sortedPlaces.length ? escapeHtml(sortedPlaces.slice(0, 40).join(", ")) + (sortedPlaces.length > 40 ? `, +${sortedPlaces.length - 40} more` : "") : "No places added yet."}</div>`);
+      setStatTooltip("tooltip-flights", `<strong>Flights shown</strong>${modeCounts.flight || 0} visible flight segment${modeCounts.flight === 1 ? "" : "s"}.${filtered.filter(t => t.mode === "flight").length ? `<table><tr><th>Route</th><th>Date</th></tr>${filtered.filter(t => t.mode === "flight").slice().sort(sortByTripDate).slice(0, 10).map(t => `<tr><td>${escapeHtml(shortPlace(t.fromLabel))} → ${escapeHtml(shortPlace(t.toLabel))}</td><td>${escapeHtml(t.date || "")}</td></tr>`).join("")}</table>` : ""}`);
     }
 
+    function setStatTooltip(id, html) {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = html;
+    }
+
+    function shortPlace(label) {
+      return String(label || "").split(",")[0].trim() || label;
+    }
     function renderTripList(list) {
       const box = document.getElementById("trip-list");
       box.innerHTML = "";
@@ -1813,7 +2015,7 @@
       const duration = baseDuration / speed;
       const raw = Math.min(1, (timestamp - playback.startedAt) / duration);
       const eased = easeInOut(raw);
-      const pos = intermediatePoint(trip, eased);
+      const pos = routePoint(trip, eased);
 
       selectedTripId = trip.id;
       currentVehicle = {
@@ -1821,7 +2023,8 @@
         lat: pos.lat,
         lng: pos.lng,
         icon: getModeIcon(trip.mode),
-        title: `${trip.fromLabel} → ${trip.toLabel}`
+        title: `${trip.fromLabel} → ${trip.toLabel}`,
+        rotation: getVehicleRotation(trip, eased)
       };
 
       if (raw >= 0.86) {
@@ -1845,7 +2048,8 @@
           lat: trip.toLat,
           lng: trip.toLon,
           icon: getModeIcon(trip.mode),
-          title: `${trip.fromLabel} → ${trip.toLabel}`
+          title: `${trip.fromLabel} → ${trip.toLabel}`,
+          rotation: getVehicleRotation(trip, 1)
         };
         currentArrivalLabel = {
           type: "arrival-label",
@@ -2075,11 +2279,12 @@
           const distance = Number.isFinite(row.distance) && row.distance > 0 ? row.distance : haversine(g1.lat, g1.lon, g2.lat, g2.lon);
           trips.push({
             id: generateId(),
+            sequence: getNextSequence(),
             mode: normaliseModeInput(row.mode),
             date: normaliseDateInput(row.date),
             fromLabel: g1.label || row.from,
             toLabel: g2.label || row.to,
-            company: row.company || sourceLabel || "",
+            company: cleanCompanyNote(row.company),
             distance,
             fromLat: g1.lat,
             fromLon: g1.lon,
@@ -2128,7 +2333,10 @@
       const da = Date.parse(a.date || "") || 0;
       const db = Date.parse(b.date || "") || 0;
       if (da !== db) return da - db;
-      return (a.date || "").localeCompare(b.date || "") || a.fromLabel.localeCompare(b.fromLabel) || a.toLabel.localeCompare(b.toLabel);
+      const sa = Number.isFinite(+a.sequence) ? +a.sequence : 0;
+      const sb = Number.isFinite(+b.sequence) ? +b.sequence : 0;
+      if (sa !== sb) return sa - sb;
+      return (a.id || "").localeCompare(b.id || "");
     }
 
     function getChronologicalIds(list) {
@@ -2218,6 +2426,7 @@
         const dist = haversine(g1.lat, g1.lon, g2.lat, g2.lon);
         const trip = {
           id: generateId(),
+          sequence: getNextSequence(),
           mode,
           date,
           fromLabel: g1.label,
@@ -2254,6 +2463,16 @@
       if (e.target.id === "edit-modal") closeEditModal();
     });
 
+    document.getElementById("data-tools-btn").onclick = () => {
+      document.getElementById("data-modal").classList.add("show");
+    };
+    document.getElementById("data-close-btn").onclick = () => {
+      document.getElementById("data-modal").classList.remove("show");
+    };
+    document.getElementById("data-modal").addEventListener("click", e => {
+      if (e.target.id === "data-modal") document.getElementById("data-modal").classList.remove("show");
+    });
+
     document.getElementById("swap-btn").onclick = () => {
       const from = document.getElementById("from-place");
       const to = document.getElementById("to-place");
@@ -2268,7 +2487,7 @@
         ["flight", "2025-09-01", "Sydney, Australia", "Queenstown, New Zealand", "Demo flight", -33.8688, 151.2093, -45.0312, 168.6626]
       ];
       demo.forEach(([mode, date, fromLabel, toLabel, company, fromLat, fromLon, toLat, toLon]) => {
-        trips.push({ id: generateId(), mode, date, fromLabel, toLabel, company, fromLat, fromLon, toLat, toLon, distance: haversine(fromLat, fromLon, toLat, toLon) });
+        trips.push({ id: generateId(), sequence: getNextSequence(), mode, date, fromLabel, toLabel, company, fromLat, fromLon, toLat, toLon, distance: haversine(fromLat, fromLon, toLat, toLon) });
       });
       saveTrips();
       renderAll();
@@ -2308,7 +2527,7 @@
       }
     };
 
-    ["search-filter", "year-filter", "sort-filter"].forEach(id => {
+    ["search-filter", "date-from-filter", "date-to-filter", "sort-filter"].forEach(id => {
       document.getElementById(id).addEventListener("input", () => {
         stopPlayback(false);
         renderAll();
@@ -2321,15 +2540,18 @@
 
     document.getElementById("reset-filters-btn").onclick = () => {
       document.getElementById("search-filter").value = "";
-      document.getElementById("year-filter").value = "";
+      document.getElementById("date-from-filter").value = "";
+      document.getElementById("date-to-filter").value = "";
       document.getElementById("sort-filter").value = "date-asc";
       settings.modeFilter = "";
       saveSettings();
       renderAll();
     };
 
-    document.getElementById("play-visible-btn").onclick = () => playTrips(getChronologicalIds(trips));
+    document.getElementById("play-visible-btn").onclick = () => playTrips(getChronologicalIds(currentFiltered));
+    document.getElementById("play-visible-btn-top").onclick = () => playTrips(getChronologicalIds(currentFiltered));
     document.getElementById("focus-all-btn").onclick = focusAll;
+    document.getElementById("focus-all-btn-top").onclick = focusAll;
     document.getElementById("stop-btn").onclick = () => stopPlayback(false);
 
     document.getElementById("theme-btn").onclick = () => {
@@ -2362,7 +2584,7 @@
         return;
       }
       const grid = parseDelimitedText(text);
-      await importGrid(grid, "Pasted import");
+      await importGrid(grid, "");
     };
 
     document.getElementById("upload-sheet-btn").onclick = () => {
